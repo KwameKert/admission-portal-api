@@ -1,0 +1,19 @@
+{
+  "name": "nodetigerseal",
+  "version": "1.0.0",
+  "description": "node broiler template with security",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/KwameKert/nodeTigerSeal.git"
+  },
+  "author": "kwame asante",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KwameKert/nodeTigerSeal/issues"
+  },
+  "homepage": "https://github.com/KwameKert/nodeTigerSeal#readme"
+}
