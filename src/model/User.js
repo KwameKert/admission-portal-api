@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bycrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const Task = require('./Task');
 
 //user schema
 

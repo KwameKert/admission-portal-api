@@ -12,12 +12,11 @@ app.listen(port, ()=>{
 
 
 
-const userRouter = require('./routers/user')
+const userRouter = require('./router/user')
 
 
 app.use(express.json())
 app.use(userRouter)
-app.use(taskRouter)
 
 
 
