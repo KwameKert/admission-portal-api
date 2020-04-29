@@ -11,6 +11,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    username:{
+        type: String,
+        required: true,
+        trim: true
+    },
     email: {
      type: String,
      required: true,
@@ -87,9 +92,9 @@ userSchema.methods.generateUserToken = async function() {
     return token;
 }
 
-userSchema.statics.findByCredentials = async (email, password)=>{
+userSchema.statics.findByCredentials = async (username, password)=>{
 
-    const user = await User.findOne({email})
+    const user = await User.findOne({username})
     if(!user){
         throw new Error("Email incorrect")
     }

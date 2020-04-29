@@ -125,11 +125,11 @@ router.delete('/users/me',auth, async(req,res)=>{
 
 
 router.post('/users/login', async (req, res)=> {
-    const email = req.body.email
+    const username = req.body.username
     const password = req.body.password
 
     try {
-        const user = await User.findByCredentials(email, password)
+        const user = await User.findByCredentials(username, password)
         const token = await user.generateUserToken();
         res.status(302).send({user, token});
 
