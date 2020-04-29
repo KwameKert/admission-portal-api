@@ -4,9 +4,11 @@ const StudentDetail = require('../model/StudentDetail')
 const auth = require('../middleware/auth')
 
 
-router.post('/studentDetails/add', async (req, res)=>{
+router.post('/studentDetails/add', auth, async (req, res)=>{
     
-    const detail = new StudentDetail(req.body);
+    const detail = new StudentDetail({
+        ...req.body,
+        owner: req._id});
 
     try{
 
