@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-
 //student detail schema
 
 const studentDetailSchema = new Schema({
@@ -52,6 +51,11 @@ const studentDetailSchema = new Schema({
     motherPhone: {
         type: Number,
         required: true
+    },
+    student: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     }
 
 })

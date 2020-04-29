@@ -13,12 +13,11 @@ app.listen(port, ()=>{
 
 
 const userRouter = require('./router/user')
-
+const studentDetailRouter = require('./router/studentDetail')
 
 app.use(express.json())
 app.use(userRouter)
-
-
+app.use(studentDetailRouter)
 
 
 

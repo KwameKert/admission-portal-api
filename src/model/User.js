@@ -51,6 +51,12 @@ const userSchema = new mongoose.Schema({
 })
 
 
+userSchema.virtual('details', {
+    ref: 'StudentDetail',
+    localField: '_id',
+    foreignField: 'student'
+})
+
 
 
 //hiding data 
@@ -84,16 +90,10 @@ userSchema.methods.generateUserToken = async function() {
 userSchema.statics.findByCredentials = async (email, password)=>{
 
     const user = await User.findOne({email})
-
     if(!user){
         throw new Error("Email incorrect")
     }
-
-  
-
     const isMatch = await bycrypt.compare(password, user.password);
-    
-
     if(!isMatch){
         throw new Error("Invalid credentials")
     }
