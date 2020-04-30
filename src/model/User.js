@@ -2,15 +2,10 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bycrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-
+const ApplicantDetail = require('./ApplicantDetail')
 //user schema
 
 const userSchema = new mongoose.Schema({
-    name : {
-        type: String,
-        required: true,
-        trim: true
-    },
     username:{
         type: String,
         required: true,
@@ -54,14 +49,6 @@ const userSchema = new mongoose.Schema({
    
 
 })
-
-
-userSchema.virtual('details', {
-    ref: 'StudentDetail',
-    localField: '_id',
-    foreignField: 'student'
-})
-
 
 
 //hiding data 
@@ -121,6 +108,20 @@ userSchema.pre('save', async function(next) {
 
 
 
+userSchema.virtual('details', {
+    ref: 'ApplicantDetailk',
+    localField: '_id',
+    foreignField: 'detail'
+})
+
+
+userSchema.virtual('test').get(function(){
+
+    return 'Test'
+
+})
+userSchema.set('toObject', { virtuals: true })
+userSchema.set('toJSON', { virtuals: true })
 
 //creating user model 
 const User = mongoose.model('User', userSchema)

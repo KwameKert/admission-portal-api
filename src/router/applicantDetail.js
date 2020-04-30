@@ -34,16 +34,13 @@ router.patch('/applicantDetails/:id', auth, async (req, res)=>{
         try{
 
         if(!isValid){
-            console.log("inside is valid ")
             res.status(401).send({'message' : 'Invalid inputs'})
         }else{
-
-            console.log("outside valid ")
             let details = await ApplicantDetail.findOne({_id, applicant: req.user._id}) 
-
            if(!details){
                 res.status(404).send({message: "User not Found"})
-           }
+           }else{
+
 
             updates.forEach(update=>details[update] = req.body[update])
             
@@ -51,6 +48,7 @@ router.patch('/applicantDetails/:id', auth, async (req, res)=>{
 
 
             res.status(200).send({'message': 'Applicant details updated '})
+           }
             
 
 

@@ -52,7 +52,7 @@ const applicantDetailSchema = new Schema({
         type: Number,
         required: true
     },
-    applicant: {
+    detail: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'User'

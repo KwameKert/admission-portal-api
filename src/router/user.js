@@ -23,7 +23,7 @@ router.post('/users',async (req,res)=>{
 router.get('/users',auth, async (req,res)=>{
 
     try{
-        const users =  await User.find({role: 'applicant'})
+        const users =  await User.find()
         res.send(users)
     }catch(e){
         res.status(400).send(e)
@@ -31,10 +31,11 @@ router.get('/users',auth, async (req,res)=>{
  
 })
 
-//get all Students
+//get all Applicants
 router.get('/applicants', auth, async (req, res) =>{
 
     try{
+        console.log("Im here" )
         const applicants = await User.find({role: 'applicant'})
 
         res.send(applicants)
