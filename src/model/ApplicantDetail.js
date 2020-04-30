@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-//student detail schema
+//applicant detail schema
 
-const studentDetailSchema = new Schema({
+const applicantDetailSchema = new Schema({
     
     firstName: {
         type: String,
@@ -52,7 +52,7 @@ const studentDetailSchema = new Schema({
         type: Number,
         required: true
     },
-    student: {
+    applicant: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'User'
@@ -62,6 +62,6 @@ const studentDetailSchema = new Schema({
 
 
 
-const StudentDetail = mongoose.model('StudentDetail', studentDetailSchema)
+const ApplicantDetail = mongoose.model('ApplicantDetail', applicantDetailSchema)
 
-module.exports = StudentDetail 
+module.exports = ApplicantDetail 

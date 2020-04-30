@@ -23,7 +23,7 @@ router.post('/users',async (req,res)=>{
 router.get('/users',auth, async (req,res)=>{
 
     try{
-        const users =  await User.find({role: 'student'})
+        const users =  await User.find({role: 'applicant'})
         res.send(users)
     }catch(e){
         res.status(400).send(e)
@@ -32,12 +32,12 @@ router.get('/users',auth, async (req,res)=>{
 })
 
 //get all Students
-router.get('/students', auth, async (req, res) =>{
+router.get('/applicants', auth, async (req, res) =>{
 
     try{
-        const students = await User.find({role: 'student'})
+        const applicants = await User.find({role: 'applicant'})
 
-        res.send(students)
+        res.send(applicants)
 
     }catch(e){
         res.status(500).send({error: 'Oops an error occured'})
