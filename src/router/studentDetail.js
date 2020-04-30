@@ -24,32 +24,41 @@ router.post('/studentDetails/', auth, async (req, res)=>{
 
 router.patch('/studentDetails/:id', auth, async (req, res)=>{
 
-        let updates = req.body
+        let updates = Object.keys(req.body)
         let _id = req.params.id
-        let details = req.body
-        let allowedParams = ['first_name', 'other_names', 'last_name', 'occupation', 'address', 'fatherName', 
-        'fatherAddress', 'fatherPhone', 'motherName', 'motherAdress', 'motherPhone' ]
-        let isValid = updates.every((update)=> allowedParams.includes(update));
+        let allowedParams = ['firstName', 'otherNames', 'lastName', 'occupation', 'address', 'fatherName', 
+        'fatherAddress','fatherEmail','motherEmail' , 'fatherPhone', 'motherName', 'motherAddress', 'motherPhone' ]
+        let isValid =  updates.every((update)=> allowedParams.includes(update));
         
 
-        if(!isValid){
-            res.status(401).send({'message' : 'Invalid inputs'})
-        }
         try{
 
-            let detailsFound = await StudentDetail.findOne({_id, student: req.user._id}) 
+        if(!isValid){
+            console.log("inside is valid ")
+            res.status(401).send({'message' : 'Invalid inputs'})
+        }else{
 
-           if(!detailsFound){
+            console.log("outside valid ")
+            let details = await StudentDetail.findOne({_id, student: req.user._id}) 
+
+           if(!details){
                 res.status(404).send({message: "User not Found"})
-           } 
+           }
 
-            updates.forEach(update=>detailsFound[update] = req.body[update])
+            updates.forEach(update=>details[update] = req.body[update])
             
-            await detailsFound.save()
+            await details.save()
+
 
             res.status(200).send({'message': 'Student details updated '})
+            
+
+
+        }
+
 
         }catch(e){
+            console.log(e)
             res.status(417).send(e)
         }
 

@@ -40,11 +40,11 @@ programSchema.pre('findOneAndUpdate', function(next){
     next()
 
 
-}
+});
 
 
 
-const Program = mongoose.model(programSchema); 
+const Program = mongoose.model('Program',programSchema); 
 
 
 

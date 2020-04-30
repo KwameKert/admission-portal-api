@@ -13,7 +13,7 @@ router.post('/program', auth,  async (req, res)=>{
 
         await  program.save()
 
-        res.send(201).send(program)
+        res.status(201).send(program)
 
     }catch(e){
         res.send(417).send(e)
@@ -21,3 +21,7 @@ router.post('/program', auth,  async (req, res)=>{
 
 
 });
+
+
+
+module.exports = router
