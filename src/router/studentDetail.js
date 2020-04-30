@@ -1,14 +1,14 @@
 const express = require('express')
 const router = express.Router();
-const StudentDetail = require('../model/StudentDetail')
+const ApplicantDetail = require('../model/ApplicantDetail')
 const auth = require('../middleware/auth')
 
 
-router.post('/studentDetails/', auth, async (req, res)=>{
+router.post('/applicantDetails/', auth, async (req, res)=>{
     
-    const detail = new StudentDetail({
+    const detail = new ApplicantDetail({
         ...req.body,
-        student: req.user._id});
+        applicant: req.user._id});
 
     try{
 
@@ -22,7 +22,7 @@ router.post('/studentDetails/', auth, async (req, res)=>{
 });
 
 
-router.patch('/studentDetails/:id', auth, async (req, res)=>{
+router.patch('/applicantDetails/:id', auth, async (req, res)=>{
 
         let updates = Object.keys(req.body)
         let _id = req.params.id
@@ -39,7 +39,7 @@ router.patch('/studentDetails/:id', auth, async (req, res)=>{
         }else{
 
             console.log("outside valid ")
-            let details = await StudentDetail.findOne({_id, student: req.user._id}) 
+            let details = await ApplicantDetail.findOne({_id, applicant: req.user._id}) 
 
            if(!details){
                 res.status(404).send({message: "User not Found"})
@@ -50,7 +50,7 @@ router.patch('/studentDetails/:id', auth, async (req, res)=>{
             await details.save()
 
 
-            res.status(200).send({'message': 'Student details updated '})
+            res.status(200).send({'message': 'Applicant details updated '})
             
 
 
