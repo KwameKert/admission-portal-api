@@ -18,10 +18,12 @@ router.post('/users',async (req,res)=>{
  
 })
 
+
+//get all users
 router.get('/users',auth, async (req,res)=>{
 
     try{
-        const users =  await User.find({})
+        const users =  await User.find({role: 'student'})
         res.send(users)
     }catch(e){
         res.status(400).send(e)
@@ -29,10 +31,22 @@ router.get('/users',auth, async (req,res)=>{
  
 })
 
+//get all Students
+router.get('/students', auth, async (req, res) =>{
+
+    try{
+        const students = await User.find({role: 'student'})
+
+        res.send(students)
+
+    }catch(e){
+        res.status(500).send({error: 'Oops an error occured'})
+    }
+
+});
 
 
-
-
+//logout users
 router.get('/users/logout', auth, async (req, res)=>{
 
     try{
@@ -54,7 +68,6 @@ router.get('/users/logout', auth, async (req, res)=>{
 
 
 //logout user from all sesssions
-
 router.get('/users/logoutAll', auth, async (req,res)=>{
 
     try{
@@ -89,17 +102,19 @@ router.patch('/users/me',auth, async (req, res)=>{
     const allowedParams = ['name','email','role','password']
     const isValid = updates.every((update)=> allowedParams.includes(update))
 
-    if(!isValid){
-        return res.status(403).send({"error": "Invalid parameters"})
-    }
     try {
       
+    if(!isValid){
+        return res.status(403).send({"error": "Invalid parameters"})
+    }else{
+
         const user = req.user
         updates.forEach(update => user[update] = req.body[update] );
 
         user.save()
 
         res.send(user)
+    }
     }catch(e){
         res.status(500).send(e)
     }
@@ -107,23 +122,10 @@ router.patch('/users/me',auth, async (req, res)=>{
 })
 
 
-//deleting user
-
-router.delete('/users/me',auth, async(req,res)=>{
- 
-
-    try {
-
-        await req.user.remove()
-       
-        res.status(202).send({user: req.user,message:'User deleted successfully'})
-    }catch(e){
-        res.status(500).send(e)
-    }
-})
 
 
 
+//user login
 router.post('/users/login', async (req, res)=> {
     const username = req.body.username
     const password = req.body.password
