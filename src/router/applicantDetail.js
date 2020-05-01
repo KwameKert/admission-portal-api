@@ -8,8 +8,10 @@ router.post('/applicantDetails/', auth, async (req, res)=>{
     
     const detail = new ApplicantDetail({
         ...req.body,
-        applicant: req.user._id});
-
+        detail: req.user._id,
+        name: req.user.username
+    } );
+        
     try{
 
         await detail.save();

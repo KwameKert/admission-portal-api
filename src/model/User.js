@@ -46,11 +46,26 @@ const userSchema = new mongoose.Schema({
             }
         }
     ],
-   
+     
 
 })
 
 
+userSchema.virtual('details', {
+
+    ref: 'ApplicantDetail',
+    localField: '_id',
+    foreignField: 'detail'
+})
+
+userSchema.virtual('name', {
+
+    ref: 'ApplicantDetail',
+    localField: 'username',
+    foreignField: 'name'
+
+})
+    
 //hiding data 
 userSchema.methods.toJSON = function() {
 
@@ -108,18 +123,6 @@ userSchema.pre('save', async function(next) {
 
 
 
-userSchema.virtual('details', {
-    ref: 'ApplicantDetailk',
-    localField: '_id',
-    foreignField: 'detail'
-})
-
-
-userSchema.virtual('test').get(function(){
-
-    return 'Test'
-
-})
 userSchema.set('toObject', { virtuals: true })
 userSchema.set('toJSON', { virtuals: true })
 

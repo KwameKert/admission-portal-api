@@ -53,14 +53,21 @@ const applicantDetailSchema = new Schema({
         required: true
     },
     detail: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
+    },
+    name: {
+        type: String,
+        required: true,
+        ref: 'User'
+
     }
 
 })
 
-
+applicantDetailSchema.set('toObject', { virtuals: true })
+applicantDetailSchema.set('toJSON', { virtuals: true })
 
 const ApplicantDetail = mongoose.model('ApplicantDetail', applicantDetailSchema)
 
