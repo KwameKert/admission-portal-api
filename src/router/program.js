@@ -57,16 +57,26 @@ router.patch('/program/:id', auth,  async (req, res) => {
 router.get('/program/all', auth,  async (req, res)=>{
 
         try{
-
             const programs = await  Program.find()
-
             res.status(200).send(programs)
-
         }catch(e){
+            res.status(417).send(e)
+        }
+});
 
+
+//loading active programs
+router.get('/program/active', auth,  async (req, res)=>{
+
+        try{
+            const programs = await  Program.find()
+            res.status(200).send(programs)
+        }catch(e){
             res.status(417).send(e)
         }
 
-
+    return
 })
+
+
 module.exports = router
