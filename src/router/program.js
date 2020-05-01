@@ -30,30 +30,43 @@ router.patch('/program/:id', auth,  async (req, res) => {
         }
 
     try{
-        
         const program = await  Program.findById(_id);
-
         if(!program){
-                
             res.status(404).send({'message': 'Program not found'})
             return
         }else{
-
             updates.forEach((update)=>{
-        
                     program[update] = req.body[update]
             })
-
             await program.save();
             res.status(200).send({'message': 'Program updated'})
         }
-
     }catch(e){
-        
+        res.send(417).send(e)    
 
     }
 
 
 })
 
+
+
+
+//loading all programs
+
+router.get('/program/all', auth,  async (req, res)=>{
+
+        try{
+
+            const programs = await  Program.find()
+
+            res.status(200).send(programs)
+
+        }catch(e){
+
+            res.status(417).send(e)
+        }
+
+
+})
 module.exports = router
