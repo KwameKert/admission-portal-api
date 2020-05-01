@@ -20,6 +20,10 @@ const programSchema = new Schema({
         type: Date,
         required: true
     },
+    status: {
+        type: String,
+        default: 'active'
+    },
     createdAt: {
         type: Date,
         default: Date.now
@@ -42,15 +46,7 @@ programSchema.pre('findOneAndUpdate', function(next){
 
 });
 
-
-
 const Program = mongoose.model('Program',programSchema); 
-
-
-
-
-
-
 
 module.exports = Program
 

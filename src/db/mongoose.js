@@ -14,6 +14,5 @@ mongoose.connect(connectionUrl,{
         return console.log('unable to connect to database')
     }
 
-    console.log("Connected correctly")
 }})
 

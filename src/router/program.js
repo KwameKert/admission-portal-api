@@ -7,21 +7,53 @@ const auth  = require('../middleware/auth')
 router.post('/program', auth,  async (req, res)=>{
 
     let program = new Program(req.body)
-
-
     try{
-
         await  program.save()
-
         res.status(201).send(program)
-
     }catch(e){
         res.send(417).send(e)
     }
-
-
 });
 
 
+
+router.patch('/program/:id', auth,  async (req, res) => {
+
+    const _id = req.params.id
+    const updates  = Object.keys(req.body)
+    let allowedParams = ['name', 'description', 'price', 'endDate'  ];
+    let isValid = updates.every(update=> allowedParams.includes(update))
+
+        if(!isValid){
+            res.status(400).send({'message ': 'Invalid update properties '})
+            return
+        }
+
+    try{
+        
+        const program = await  Program.findById(_id);
+
+        if(!program){
+                
+            res.status(404).send({'message': 'Program not found'})
+            return
+        }else{
+
+            updates.forEach((update)=>{
+        
+                    program[update] = req.body[update]
+            })
+
+            await program.save();
+            res.status(200).send({'message': 'Program updated'})
+        }
+
+    }catch(e){
+        
+
+    }
+
+
+})
 
 module.exports = router
