@@ -69,7 +69,7 @@ router.get('/program/all', auth,  async (req, res)=>{
 router.get('/program/active', auth,  async (req, res)=>{
 
         try{
-            const programs = await  Program.find()
+            const programs = await  Program.find({status: 'active'})
             res.status(200).send(programs)
         }catch(e){
             res.status(417).send(e)
@@ -78,5 +78,34 @@ router.get('/program/active', auth,  async (req, res)=>{
     return
 })
 
+
+
+
+//delete program
+router.delete('/program/:id', auth, async (req, res ) =>{
+    
+    const _id = req.params.id
+
+    try{
+        const program = await Program.findById(_id)
+
+        if(!program){
+            res.status(404).send({'message': 'Program not found'})
+        }else{
+            program.status = 'deleted'
+            await program.save()
+            res.status(200).send({'message': 'Program deleted successfully'})
+
+        }
+
+
+    }catch(e){
+
+        res.status(417).send(e)
+
+    }
+
+
+})
 
 module.exports = router
