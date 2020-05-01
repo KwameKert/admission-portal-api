@@ -58,13 +58,6 @@ userSchema.virtual('details', {
     foreignField: 'detail'
 })
 
-userSchema.virtual('name', {
-
-    ref: 'ApplicantDetail',
-    localField: 'username',
-    foreignField: 'name'
-
-})
     
 //hiding data 
 userSchema.methods.toJSON = function() {
