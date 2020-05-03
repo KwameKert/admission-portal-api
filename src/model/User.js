@@ -58,7 +58,15 @@ userSchema.virtual('details', {
     foreignField: 'detail'
 })
 
-    
+userSchema.virtual('programs', {
+
+    ref: 'ApplicantProgram',
+    localField: '_id',
+    foreignField: 'applicant'
+
+}) 
+
+
 //hiding data 
 userSchema.methods.toJSON = function() {
 

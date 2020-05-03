@@ -2,7 +2,9 @@ const express = require('express')
 const router = express.Router()
 const Program = require('../model/Program')
 const auth  = require('../middleware/auth')
+const ApplicantProgram = require('../model/ApplicantProgram')
 
+    
 
 router.post('/program', auth,  async (req, res)=>{
 
@@ -77,6 +79,9 @@ router.get('/program/active', auth,  async (req, res)=>{
 
     return
 })
+
+
+
 
 
 
