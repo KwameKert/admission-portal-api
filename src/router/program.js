@@ -6,12 +6,16 @@ const ApplicantProgram = require('../model/ApplicantProgram')
 
     
 
-router.post('/program', auth,  async (req, res)=>{
+router.post('/program/', auth,  async (req, res)=>{
 
     let program = new Program(req.body)
     try{
         await  program.save()
-        res.status(201).send(program)
+        let response = {
+            data: program,
+            message: 'Program added successfully'
+        }
+        res.status(201).send(response)
     }catch(e){
         res.send(417).send(e)
     }
