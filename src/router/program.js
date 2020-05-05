@@ -63,7 +63,7 @@ router.patch('/program/:id', auth,  async (req, res) => {
 router.get('/program/all', auth,  async (req, res)=>{
 
         try{
-            const programs = await  Program.find()
+            const programs = await  Program.find({status: {$ne: 'deleted'}})
             res.status(200).send(programs)
         }catch(e){
             res.status(417).send(e)
