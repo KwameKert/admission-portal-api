@@ -27,7 +27,7 @@ router.patch('/program/:id', auth,  async (req, res) => {
 
     const _id = req.params.id
     const updates  = Object.keys(req.body)
-    let allowedParams = ['name', 'description', 'price', 'endDate'  ];
+    let allowedParams = ['name', 'description', 'price', 'endDate', 'faculty', 'length', 'status' ];
     let isValid = updates.every(update=> allowedParams.includes(update))
 
         if(!isValid){
@@ -84,6 +84,7 @@ router.get('/program/active', auth,  async (req, res)=>{
     return
 })
 
+//fetch program
 router.get('/program/:id', auth, async (req, res)=>{
 
     const _id = req.params.id
@@ -95,11 +96,11 @@ router.get('/program/:id', auth, async (req, res)=>{
             res.status(400).send({message: 'No program found'})
         }else{
 
-            res.status(200).send({data: program, message: 'Program found'})
+            res.status(200).send({message: 'Program found', data: program})
         }
 
     }catch(e){
-        res.status(417).send(e)
+        res.status(417).send({error: 'Oops and error occured'})
     }
 
 
