@@ -142,7 +142,7 @@ router.post('/users/login', async (req, res)=> {
 
     }catch(e) {
      
-        res.status(400).send({error: 'User not found'})
+        res.status(417).send({message: 'Invalid credentials'})
     }
 })
 

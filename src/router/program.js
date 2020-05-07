@@ -95,7 +95,7 @@ router.get('/program/:id', auth, async (req, res)=>{
             res.status(400).send({message: 'No program found'})
         }else{
 
-            res.status(200).send({message: 'Program found'})
+            res.status(200).send({data: program, message: 'Program found'})
         }
 
     }catch(e){

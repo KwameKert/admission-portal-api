@@ -21,8 +21,9 @@ const programSchema = new Schema({
         type: String,
         required: true
     },
-    img_url: {
-        type: String
+    image_url: {
+        type: String,
+        required: false
     },
     price: {
         type: Number, 
