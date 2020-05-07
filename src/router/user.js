@@ -34,11 +34,10 @@ router.get('/users',auth, async (req,res)=>{
 })
 
 //get all Applicants
-router.get('/applicants', auth, async (req, res) =>{
+router.get('/users/applicants', auth, async (req, res) =>{
 
     try{
-        console.log("Im here" )
-        const applicant = await  User.findById(req.user._id).populate('details').exec()
+        const applicant = await  User.find({role: 'applicant'}).populate('details').exec()
       //  const applicants = await User.find({role: 'applicant'}).populate('details').exec();
         // const apps = await ApplicantDetail.find().populate().exec()
 
@@ -46,7 +45,7 @@ router.get('/applicants', auth, async (req, res) =>{
 
     }catch(e){
         console.log(e)
-        res.status(500).send({error: 'Oops an error occured'})
+        res.status(417).send({error: 'Oops an error occured'})
     }
 
 });
