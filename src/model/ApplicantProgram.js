@@ -28,6 +28,13 @@ const applicantProgramSchema = new Schema({
 })
 
 
+applicantProgramSchema.virtual('transaction', {
+
+    ref: 'Transaction',
+    localField: '_id',
+    foreignField: 'application'
+})
+
 const ApplicantProgram = mongoose.model('ApplicantProgram', applicantProgramSchema);
 
 module.exports = ApplicantProgram

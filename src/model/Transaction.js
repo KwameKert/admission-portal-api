@@ -6,12 +6,12 @@ const Schema  = mongoose.Schema
 const transactionModel = new Schema({
     
     amount: {
-        type: number,
+        type: Number,
         required: true
     },
     application: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'ApplicantProgram'
+        ref: 'ApplicantProgram',
         required: true
     },
     createdAt: {
@@ -24,6 +24,6 @@ const transactionModel = new Schema({
 
 
 
-const Transaction = new model.Schema('Transaction', transactionModel);
+const Transaction = mongoose.model('Transaction', transactionModel);
 
 module.exports = Transaction

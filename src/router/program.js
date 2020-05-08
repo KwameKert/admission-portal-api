@@ -27,7 +27,7 @@ router.patch('/program/:id', auth,  async (req, res) => {
 
     const _id = req.params.id
     const updates  = Object.keys(req.body)
-    let allowedParams = ['name', 'description', 'price', 'endDate', 'length', 'faculty'  ];
+    let allowedParams = ['name', 'description', 'price', 'endDate'  ];
     let isValid = updates.every(update=> allowedParams.includes(update))
 
         if(!isValid){
@@ -76,7 +76,7 @@ router.get('/program/active', auth,  async (req, res)=>{
 
         try{
             const programs = await  Program.find({status: 'active'})
-            res.status(200).send({data: programs, message: 'programs found'} )
+            res.status(200).send(programs)
         }catch(e){
             res.status(417).send(e)
         }
@@ -95,16 +95,36 @@ router.get('/program/:id', auth, async (req, res)=>{
             res.status(400).send({message: 'No program found'})
         }else{
 
-            res.status(200).send({data: program, message: 'Program found'})
+            res.status(200).send({message: 'Program found'})
         }
 
     }catch(e){
-        res.status(417).send({message: 'Ooops an error occured'})
+        res.status(417).send({message: 'Snap! something went wrong '})
     }
 
 
 })
 
+
+//apply program
+router.post('/program/apply', auth, async (req, res) =>{
+    
+    let application = {
+        applicant: req.user._id,
+        program: req.program
+    }
+
+    try{
+
+        let newApplication = new Application();
+        await  newApplication.save(application)
+
+        res.status(200).send({data: newApplication, message: 'Application submitted '})
+    }catch(e){
+        res.status(417).send({message: 'Oops an error occured'})
+    }
+
+})
 
 
 
