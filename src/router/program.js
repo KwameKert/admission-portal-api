@@ -3,8 +3,8 @@ const router = express.Router()
 const Program = require('../model/Program')
 const auth  = require('../middleware/auth')
 const ApplicantProgram = require('../model/ApplicantProgram')
-
-    
+const mongoose = require('mongoose')
+const Transaction = require('../model/Transaction')   
 
 router.post('/program/', auth,  async (req, res)=>{
 
@@ -111,16 +111,21 @@ router.post('/program/apply', auth, async (req, res) =>{
     
     let application = {
         applicant: req.user._id,
-        program: req.program
+        program: mongoose.Types.ObjectId(req.body.program)
     }
+
 
     try{
 
-        let newApplication = new Application();
-        await  newApplication.save(application)
+        let newApplication = new ApplicantProgram(application);
+        await  newApplication.save()
 
-        res.status(200).send({data: newApplication, message: 'Application submitted '})
+        let transaction = new Transaction({application: newApplication._id,amount: req.body.amount })
+        await transaction.save()
+
+        res.status(200).send({transaction, application: newApplication, message: 'Application submitted '})
     }catch(e){
+        console.log(e)
         res.status(417).send({message: 'Oops an error occured'})
     }
 
