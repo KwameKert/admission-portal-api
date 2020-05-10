@@ -76,7 +76,7 @@ router.get('/program/active', auth,  async (req, res)=>{
 
         try{
             const programs = await  Program.find({status: 'active'})
-            res.status(200).send(programs)
+            res.status(200).send({data: programs , message: 'Prograns found'})
         }catch(e){
             res.status(417).send(e)
         }
@@ -95,7 +95,7 @@ router.get('/program/:id', auth, async (req, res)=>{
             res.status(400).send({message: 'No program found'})
         }else{
 
-            res.status(200).send({message: 'Program found'})
+            res.status(200).send({message: 'Program found', data: program })
         }
 
     }catch(e){
