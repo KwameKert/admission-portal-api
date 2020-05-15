@@ -2,23 +2,31 @@ const express = require('express')
 const router = express.Router();
 const ApplicantDetail = require('../model/ApplicantDetail')
 const auth = require('../middleware/auth')
+const  multer  = require('multer')
+const upload = multer({
+    limits: {
+        fileSize: 2000000
+    }
+
+})
 
 
-router.post('/applicantDetails/', auth, async (req, res)=>{
+
+
+router.post('/applicantDetails/', auth, upload.single('schoolDocument'),  async (req, res)=>{
     
     const detail = new ApplicantDetail({
         ...req.body,
         owner: req.user._id
     } );
         
-    try{
 
         await detail.save();
         res.status(201).send(detail)
 
-    }catch(e){
-        res.send(e)
-    }
+
+},(error, req, res, next)=>{
+    res.status(400).send({error: error.message})
 
 });
 
