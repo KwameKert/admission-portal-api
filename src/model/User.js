@@ -46,6 +46,10 @@ const userSchema = new mongoose.Schema({
             }
         }
     ],
+    isActivated: {
+        type: Boolean,
+        default: true
+    }
      
 
 })
@@ -55,7 +59,7 @@ userSchema.virtual('details', {
 
     ref: 'ApplicantDetail',
     localField: '_id',
-    foreignField: 'detail'
+    foreignField: 'owner'
 })
 
 userSchema.virtual('programs', {

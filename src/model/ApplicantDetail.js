@@ -52,20 +52,14 @@ const applicantDetailSchema = new Schema({
         type: Number,
         required: true
     },
-    detail: {
+    owner: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'User'
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
     }
 
+},{
+    timestamps: true
 })
 
 const ApplicantDetail = mongoose.model('ApplicantDetail', applicantDetailSchema)
