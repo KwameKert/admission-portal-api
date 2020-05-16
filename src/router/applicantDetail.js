@@ -20,11 +20,14 @@ router.post('/user/applicantDetails/', auth, upload.single('schoolDocument'),  a
     const detail = new ApplicantDetail({
         ...req.body,
         owner: req.user._id,
-        document_url: req.file.filename
+        document_url:`assets/images/${req.file.filename}`
     } );
         
         console.log(detail)
-       // await detail.save();
+        await detail.save();
+       
+        req.user.isActivated = true;
+        await req.user.save()
         res.status(201).send(detail)
 
 
