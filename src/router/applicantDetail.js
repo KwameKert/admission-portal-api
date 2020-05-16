@@ -17,11 +17,10 @@ const upload = multer({
 router.post('/user/applicantDetails/', auth, upload.single('schoolDocument'),  async (req, res)=>{
   
 
-    console.log(req.file)
     const detail = new ApplicantDetail({
         ...req.body,
         owner: req.user._id,
-       // schoolDocuments
+        document_url: req.file.filename
     } );
         
         console.log(detail)
@@ -30,7 +29,7 @@ router.post('/user/applicantDetails/', auth, upload.single('schoolDocument'),  a
 
 
 },(error, req, res, next)=>{
-    res.status(402).send({error: error.message})
+    res.status(400).send({error: error.message})
 
 });
 

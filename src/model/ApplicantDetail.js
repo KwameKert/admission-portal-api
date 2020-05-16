@@ -56,8 +56,8 @@ const applicantDetailSchema = new Schema({
         required: true,
         ref: 'User'
     },
-    schoolDocument: {
-        type: Buffer,
+    document_url: {
+        type: String,
         required: true
     }
 
