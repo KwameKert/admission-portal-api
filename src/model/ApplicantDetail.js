@@ -11,7 +11,6 @@ const applicantDetailSchema = new Schema({
     },
     otherNames: {
         type: String, 
-        required: false,
         trim: true
     },
     lastName: {

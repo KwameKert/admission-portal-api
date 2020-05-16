@@ -4,6 +4,7 @@ const ApplicantDetail = require('../model/ApplicantDetail')
 const auth = require('../middleware/auth')
 const  multer  = require('multer')
 const upload = multer({
+    dest: 'assets/images',
     limits: {
         fileSize: 2000000
     }
@@ -13,25 +14,28 @@ const upload = multer({
 
 
 
-router.post('/applicantDetails/', auth, upload.single('schoolDocument'),  async (req, res)=>{
-    
+router.post('/user/applicantDetails/', auth, upload.single('schoolDocument'),  async (req, res)=>{
+  
+
+    console.log(req.file)
     const detail = new ApplicantDetail({
         ...req.body,
-        owner: req.user._id
+        owner: req.user._id,
+       // schoolDocuments
     } );
         
-
-        await detail.save();
+        console.log(detail)
+       // await detail.save();
         res.status(201).send(detail)
 
 
 },(error, req, res, next)=>{
-    res.status(400).send({error: error.message})
+    res.status(402).send({error: error.message})
 
 });
 
 
-router.patch('/applicantDetails/:id', auth, async (req, res)=>{
+router.patch('/user/applicantDetails/:id', auth, async (req, res)=>{
 
         let updates = Object.keys(req.body)
         let _id = req.params.id
