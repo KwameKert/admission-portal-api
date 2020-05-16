@@ -23,7 +23,6 @@ router.post('/user/applicantDetails/', auth, upload.single('schoolDocument'),  a
         document_url:`assets/images/${req.file.filename}`
     } );
         
-        console.log(detail)
         await detail.save();
        
         req.user.isActivated = true;

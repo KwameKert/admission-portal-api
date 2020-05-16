@@ -38,7 +38,10 @@ const applicantDetailSchema = new Schema({
         type: Number,
         required: true
     },
-
+    dob: {
+        type: Date,
+        required: true
+    },
     motherName: {
         type: String, 
         required: true
