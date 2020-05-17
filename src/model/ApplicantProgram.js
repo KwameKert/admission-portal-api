@@ -15,16 +15,17 @@ const applicantProgramSchema = new Schema({
         ref: 'Program',
         required: true
     },
-    
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now
-    }
 
+
+    status: {
+        type: String, 
+        default: 'pending'
+        
+    },
+
+}, {
+
+    timestamps: true
 })
 
 

@@ -120,7 +120,7 @@ router.post('/program/apply', auth, async (req, res) =>{
         let newApplication = new ApplicantProgram(application);
         await  newApplication.save()
 
-        let transaction = new Transaction({application: newApplication._id,amount: req.body.amount })
+        let transaction = new Transaction({application: newApplication._id,amount: req.body.amount, method: req.body.method })
         await transaction.save()
 
         res.status(200).send({transaction, application: newApplication, message: 'Application submitted '})
