@@ -9,17 +9,18 @@ const transactionModel = new Schema({
         type: Number,
         required: true
     },
+    method: {
+        type: String,
+        required: true
+    },
     application: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ApplicantProgram',
         required: true
-    },
-    createdAt: {
-        type: Date,
-        default: Date.now
     }
 
-
+}, {
+    timestamps: true
 })
 
 
