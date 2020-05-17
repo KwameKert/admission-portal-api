@@ -6,7 +6,6 @@ const auth = require('../middleware/auth')
 
 
 //get all applications
-
 router.get('/applications', auth, async (req, res) =>{
     
     try{
@@ -15,13 +14,21 @@ router.get('/applications', auth, async (req, res) =>{
         res.status(200).send(applications)
 
     }catch(e){
-        res.status(401).send({error: e.message})
+        res.status(500).send({error: e.message})
     }
 
 
 })
 
 
+//get all pending applications
+router.get('/applications/pending', auth, async (req, res ) => {
+
+    try{
+
+    }
+
+})
 
 
 
