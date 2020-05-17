@@ -28,15 +28,12 @@ const applicantDetailSchema = new Schema({
     },
     fatherName: {
         type: String, 
-        required: true
     },
     fatherAddress: {
         type: String, 
-        required: true
     },
     fatherPhone: {
         type: Number,
-        required: true
     },
     dob: {
         type: Date,
@@ -44,15 +41,12 @@ const applicantDetailSchema = new Schema({
     },
     motherName: {
         type: String, 
-        required: true
     },
     motherAddress: {
         type: String, 
-        required: true
     },
     motherPhone: {
         type: Number,
-        required: true
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,

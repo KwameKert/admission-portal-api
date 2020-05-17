@@ -10,12 +10,23 @@ router.post('/users',async (req,res)=>{
     const user = new User(req.body);
 
     try {
+        //check for existing applicants
+        users = await  User.find({email: user.email})
 
-        await user.save()
-        const token = await user.generateUserToken();
-        res.status(201).send({user, token})
+        //save if email doesnt exists else return error
+        if(users.length < 1){
+        
+            await user.save()
+            const token = await user.generateUserToken();
+            res.status(201).send({user, token, message: "User added succesfully "})
+        
+        }else{
+
+            res.status(401).send({error: "Email exists"})
+
+        }
     }catch(e) {
-        res.status(402).send(e)
+        res.status(402).send({error: e.message})
     }
  
 })

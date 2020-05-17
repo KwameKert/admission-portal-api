@@ -22,12 +22,16 @@ router.post('/user/applicantDetails/', auth, upload.single('schoolDocument'),  a
         owner: req.user._id,
         document_url:`assets/images/${req.file.filename}`
     } );
-        
+    
+    try{
         await detail.save();
-       
         req.user.isActivated = true;
         await req.user.save()
         res.status(201).send(detail)
+    }catch(e){
+        console.log(e)
+        res.status(401).send()
+    }
 
 
 },(error, req, res, next)=>{
