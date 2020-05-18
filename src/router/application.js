@@ -65,7 +65,7 @@ router.get('/application/:id', auth, async( req, res )=>{
             let applicant = await Applicant.findOne({ _id: application.applicant }).populate('details').exec()
             
 
-            res.status(200).send({data: {program, applicant }, message: 'Application found'})
+            res.status(200).send({data: {program, applicant, application }, message: 'Application found'})
 
         }catch(e){
             res.status(400).send({error: e.message})
