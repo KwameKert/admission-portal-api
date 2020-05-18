@@ -18,10 +18,20 @@ router.get('/dashboard', auth, async (req, res) =>{
         let pendingApplications = await  Application.find({status: 'pending'}).countDocuments()
         let approvedApplications = await  Application.find({status: 'approved'}).countDocuments()
         let rejectedApplications = await Application.find({status: 'rejected'}).countDocuments()
-        let transactions = await Transaction.find({}).countDocuments()
+        let transactionCount = await Transaction.find({}).countDocuments()
+        let transactions = await Transaction.find({});
 
         console.log(pendingApplications)
-        res.status(200).send({pending: pendingApplications})
+        res.status(200).send({
+            data: {
+                 pending: pendingApplications,
+                 approved: approvedApplications,
+                 rejected: rejectedApplications,
+                 transactionCount: transactionCount, 
+                 transactions: transactions
+            },
+            message: 'Dashboard components loaded'
+        })
 
     }catch(e){
         res.status(417).send({error: e.message})
