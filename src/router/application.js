@@ -10,7 +10,7 @@ router.get('/applications', auth, async (req, res) =>{
     
     try{
 
-        let applications = await  Application.find({})
+        let applications = await  Application.find({}).populate(['program', 'applicant']).exec()
         res.status(200).send(applications)
 
     }catch(e){
