@@ -28,7 +28,7 @@ router.get('/dashboard', auth, async (req, res) =>{
             data: {
                  applications:{
                     count: applicationCount,
-                    chart: [ approvedApplications, pendingApplications, rejectedApplications],
+                    chart: [ rejectedApplications, approvedApplications, pendingApplications],
                     applicants: applicantCount 
                 },
                 transactions:{
