@@ -18,6 +18,7 @@ const applicantDetailRouter = require('./router/applicantDetail')
 const programRouter = require('./router/program')
 const applicationRouter = require('./router/application')
 const dashboardRouter = require('./router/dashboard')
+const transactionRouter = require('./router/transaction')
 
 app.use(cors())
 app.use(express.json())
@@ -26,6 +27,7 @@ app.use(applicantDetailRouter)
 app.use(programRouter)
 app.use(applicationRouter)
 app.use(dashboardRouter)
+app.use(transactionRouter)
 
 
 
