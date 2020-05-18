@@ -17,6 +17,10 @@ const transactionModel = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'ApplicantProgram',
         required: true
+    },
+    user: {
+        type: String,
+        required: true
     }
 
 }, {
