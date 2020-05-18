@@ -124,7 +124,7 @@ router.post('/program/apply', auth, async (req, res) =>{
         let transaction = new Transaction({
             application: newApplication._id,
             amount: req.body.amount, 
-            method: req.body.method 
+            method: req.body.method, 
             user: req.user.username
         })
         await transaction.save()
