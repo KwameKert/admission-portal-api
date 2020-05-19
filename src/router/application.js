@@ -74,7 +74,25 @@ router.get('/application/:id', auth, async( req, res )=>{
 
 })
 
+//update application
+router.patch('/application/:id', auth, async(req, res) =>{
 
+    let id = req.params.id
+
+    try{
+        
+        let application = await Application.findOne({_id: id})
+        application.status = req.body.status
+
+        await application.save();
+
+        res.status(200).send({data: application, message: 'Application updated '});
+
+    }catch(e){
+        
+        res.status(400).send({error: e.message})
+    }
+})
 
 
 
